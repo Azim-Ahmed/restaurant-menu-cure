@@ -10,4 +10,3 @@
 http://localhost:1337/api/auth/local → login (POST)
 
 http://localhost:1337/api/auth/local/register → register (POST)
-
