@@ -25,6 +25,12 @@
       "multiple": false,
       "required": false,
       "private": true
+    },
+    "foods": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::food.food",
+      "mappedBy": "labels"
     }
   }
 }

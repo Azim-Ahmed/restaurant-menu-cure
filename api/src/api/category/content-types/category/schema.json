@@ -24,6 +24,12 @@
       "relation": "manyToOne",
       "target": "api::reataurant.reataurant",
       "inversedBy": "categories"
+    },
+    "foods": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::food.food",
+      "mappedBy": "category"
     }
   }
 }
