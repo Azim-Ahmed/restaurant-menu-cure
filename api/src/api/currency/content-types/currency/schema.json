@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "currencies",
+  "info": {
+    "singularName": "currency",
+    "pluralName": "currencies",
+    "displayName": "Currency",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "minLength": 2
+    },
+    "reataurants": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::reataurant.reataurant",
+      "mappedBy": "currency"
+    },
+    "sign": {
+      "type": "string"
+    }
+  }
+}

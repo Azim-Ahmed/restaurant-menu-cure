@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "labels",
+  "info": {
+    "singularName": "label",
+    "pluralName": "labels",
+    "displayName": "Label"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "minLength": 3
+    },
+    "sign": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "private": true
+    }
+  }
+}
