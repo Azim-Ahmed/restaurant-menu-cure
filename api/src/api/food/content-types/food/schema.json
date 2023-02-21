@@ -67,6 +67,12 @@
       "relation": "manyToOne",
       "target": "api::category.category",
       "inversedBy": "foods"
+    },
+    "order": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::order.order",
+      "inversedBy": "foods"
     }
   }
 }
