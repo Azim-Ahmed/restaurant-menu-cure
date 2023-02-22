@@ -1,7 +1,12 @@
+
 import { Helmet } from 'react-helmet-async';
 // @mui
 import { styled } from '@mui/material/styles';
 import { Link, Container, Typography, Divider, Stack, Button } from '@mui/material';
+
+// redux
+import { userLogin } from '../features/auth/authSlice';
+
 // hooks
 import useResponsive from '../hooks/useResponsive';
 // components
@@ -9,6 +14,9 @@ import Logo from '../components/logo';
 import Iconify from '../components/iconify';
 // sections
 import { LoginForm } from '../sections/auth/login';
+
+
+
 
 // ----------------------------------------------------------------------
 
@@ -98,7 +106,7 @@ export default function LoginPage() {
               </Typography>
             </Divider>
 
-            <LoginForm />
+            <LoginForm submitLogin = {userLogin}/>
           </StyledContent>
         </Container>
       </StyledRoot>

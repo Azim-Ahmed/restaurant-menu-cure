@@ -2,6 +2,11 @@ import PropTypes from 'prop-types';
 // @mui
 import { styled } from '@mui/material/styles';
 import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
+
+// import {} from '../../../features/auth/'
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 // utils
 import { bgBlur } from '../../../utils/cssStyles';
 // components
@@ -43,6 +48,15 @@ Header.propTypes = {
 };
 
 export default function Header({ onOpenNav }) {
+
+  const navigate = useNavigate();
+
+  const {user} = useSelector(state => state.auth)
+
+  if(!user){
+    navigate("/login")
+  }
+
   return (
     <StyledRoot>
       <StyledToolbar>
