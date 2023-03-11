@@ -49,14 +49,6 @@ Header.propTypes = {
 
 export default function Header({ onOpenNav }) {
 
-  const navigate = useNavigate();
-
-  const {user} = useSelector(state => state.auth)
-
-  if(!user){
-    navigate("/login")
-  }
-
   return (
     <StyledRoot>
       <StyledToolbar>

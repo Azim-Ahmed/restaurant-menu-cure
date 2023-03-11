@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 
 import { Box, Typography, Button, Card} from '@mui/material';
 import BasicModal from '../../../components/ui/BasicModal';
+import CreateCategoryForm from './CreateCategoryForm';
 
 const CategorySection = () => {
 
@@ -36,7 +37,9 @@ const CategorySection = () => {
 
 
     <BasicModal open={modalOpen} handleClose={modalClose}>
-        <Typography variant='h4'>Hello</Typography>
+
+        <Typography variant='h4'>Create Category</Typography>
+          <CreateCategoryForm/>
     </BasicModal>
     </>
   );
