@@ -1,6 +1,7 @@
 // component
 import GridViewIcon from '@mui/icons-material/GridView';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
+import TableBarIcon from '@mui/icons-material/TableBar';
 import SvgColor from '../../../components/svg-color';
 
 // ----------------------------------------------------------------------
@@ -24,9 +25,9 @@ const navConfig = [
     icon: <FastfoodIcon/>,
   },
   {
-    title: 'blog',
-    path: '/dashboard/blog',
-    icon: icon('ic_blog'),
+    title: 'Table',
+    path: '/dashboard/table',
+    icon: <TableBarIcon/>
   },
   {
     title: 'login',
