@@ -6,6 +6,8 @@ const colors={
     black2 : "#ababab",
     shadowColor1 : "#EDEFF1",
     borderColor1 : "#C2C2CA",
+    success : "#329242",
+    failed : "#F21B1B",
 
 }
 
