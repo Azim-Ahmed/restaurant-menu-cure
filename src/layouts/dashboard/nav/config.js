@@ -1,4 +1,7 @@
 // component
+import GridViewIcon from '@mui/icons-material/GridView';
+import FastfoodIcon from '@mui/icons-material/Fastfood';
+import TableBarIcon from '@mui/icons-material/TableBar';
 import SvgColor from '../../../components/svg-color';
 
 // ----------------------------------------------------------------------
@@ -9,7 +12,7 @@ const navConfig = [
   {
     title: 'dashboard',
     path: '/dashboard/app',
-    icon: icon('ic_analytics'),
+    icon: <GridViewIcon/>,
   },
   {
     title: 'user',
@@ -17,14 +20,14 @@ const navConfig = [
     icon: icon('ic_user'),
   },
   {
-    title: 'product',
-    path: '/dashboard/products',
-    icon: icon('ic_cart'),
+    title: 'Food',
+    path: '/dashboard/food',
+    icon: <FastfoodIcon/>,
   },
   {
-    title: 'blog',
-    path: '/dashboard/blog',
-    icon: icon('ic_blog'),
+    title: 'Table',
+    path: '/dashboard/table',
+    icon: <TableBarIcon/>
   },
   {
     title: 'login',

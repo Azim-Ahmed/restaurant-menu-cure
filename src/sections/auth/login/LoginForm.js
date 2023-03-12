@@ -1,31 +1,55 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // @mui
 import { Link, Stack, IconButton, InputAdornment, TextField, Checkbox } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+
+import { useDispatch,useSelector } from 'react-redux';
+
 // components
 import Iconify from '../../../components/iconify';
 
 // ----------------------------------------------------------------------
 
-export default function LoginForm() {
+export default function LoginForm(props) {
+  const {submitLogin} = props;
+  const {user}= useSelector(state => state.auth)
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
 
-  const handleClick = () => {
-    navigate('/dashboard', { replace: true });
+  const handleClick =async () => {
+    const loginData = {
+      mobile_number: email,
+      password
+    }
+   await dispatch(submitLogin(loginData))
+
+
+    // navigate('/dashboard', { replace: true });
   };
+
+  useEffect(()=>{
+
+    if(user){
+      navigate("/")
+    }
+  },[user])
 
   return (
     <>
       <Stack spacing={3}>
-        <TextField name="email" label="Email address" />
+        <TextField value={email} onChange={e=>setEmail(e.target.value)} name="email" label="Email address" />
 
         <TextField
           name="password"
           label="Password"
           type={showPassword ? 'text' : 'password'}
+          value={password} onChange={e=>setPassword(e.target.value)}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
