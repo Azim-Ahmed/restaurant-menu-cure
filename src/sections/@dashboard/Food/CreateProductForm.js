@@ -13,14 +13,34 @@ import {
 } from '@mui/material';
 
 import { DropzoneArea } from 'material-ui-dropzone';
+import HookFormTextField from 'src/components/Reusable/HookFormTextField';
+import { useForm } from 'react-hook-form';
+import MUIAutoComplete from 'src/components/Reusable/MuiAutoComplete';
+import DropzoneSection from 'src/components/Reusable/DropzoneSection';
 
 const CreateProductForm = () => {
-  const [age, setAge] = React.useState('');
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-
+  const [filesToSave, setFilesToSave] = React.useState([]);
+  const {
+    formState: { errors },
+    handleSubmit,
+    reset,
+    control,
+  } = useForm({
+    mode: "all",
+  });
+  const onSubmit = (data) => {
+    console.log({ data })
+  }
+  const toEpics = [
+    {
+      label: "azim",
+      value: "1"
+    },
+    {
+      label: "bro this is awesome",
+      value: "2"
+    }
+  ]
   return (
     <Box
       sx={{
@@ -32,169 +52,52 @@ const CreateProductForm = () => {
         padding: '.5rem 1rem',
       }}
     >
-      <form style={{ width: '100%', textAlign: 'center' }}>
-        <FormControl fullWidth style={{ marginTop: '.5rem' }}>
-          <InputLabel id="demo-simple-select-label"> Store</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={age}
-            label="Age"
-            onChange={handleChange}
-          >
-            <MenuItem selected value={10}>
-              Artichoke
-            </MenuItem>
-          </Select>
-        </FormControl>
 
-        <TextField style={{ width: '100%', marginTop: '.5rem' }} type="text" label="Name*" variant="outlined" />
-        <TextField style={{ width: '100%', marginTop: '.5rem' }} type="text" label="Description" variant="outlined" />
-
-        <TextField style={{ width: '100%', marginTop: '.5rem' }} type="text" label="Price*" variant="outlined" />
-        <TextField style={{ width: '100%', marginTop: '.5rem' }} type="text" label="Size" variant="outlined" />
-        <TextField style={{ width: '100%', marginTop: '.5rem' }} type="text" label="Unit" variant="outlined" />
-
-        <FormControl fullWidth style={{ marginTop: '.5rem' }}>
-          <InputLabel id="demo-simple-select-label"> Tax Category</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={age}
-            label="Age"
-            onChange={handleChange}
-          >
-            <MenuItem selected value={10}>
-              Ten
-            </MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl fullWidth style={{ marginTop: '.5rem' }}>
-          <InputLabel id="demo-simple-select-label"> Modifier groups</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={age}
-            label="Age"
-            onChange={handleChange}
-          >
-            <MenuItem selected value={10}>
-              Ten
-            </MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl fullWidth style={{ marginTop: '.5rem' }}>
-          <InputLabel id="demo-simple-select-label">Ingredient warnings</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={age}
-            label="Age"
-            onChange={handleChange}
-          >
-            <MenuItem selected value={10}>
-              Ten
-            </MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl fullWidth style={{ marginTop: '.5rem' }}>
-          <InputLabel id="demo-simple-select-label"> Modifier groups</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={age}
-            label="Age"
-            onChange={handleChange}
-          >
-            <MenuItem selected value={10}>
-              Ten
-            </MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-        </FormControl>
-
-        <Box sx={{ width: '100%', marginTop: '1rem', textAlign: 'left' }}>
-          <FormControlLabel
-            label="Featured"
-            control={
-              <Checkbox
-              // checked={isChecked}
-              // onChange={handleChange1}
-              />
-            }
-          />
-          <FormControlLabel
-            label="Availability"
-            control={
-              <Checkbox
-              // checked={isChecked}
-              // onChange={handleChange1}
-              />
-            }
-          />
-          <FormControlLabel
-            label="Availability"
-            control={
-              <Checkbox
-              // checked={isChecked}
-              // onChange={handleChange1}
-              />
-            }
-          />
-        </Box>
-
-        <FormControl fullWidth style={{ marginTop: '.5rem' }}>
-          <InputLabel id="demo-simple-select-label"> Labels</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={age}
-            label="Age"
-            onChange={handleChange}
-          >
-            <MenuItem selected value={10}>
-              Ten
-            </MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-        </FormControl>
-
-        <FormControl fullWidth style={{ marginTop: '.5rem' }}>
-          <InputLabel id="demo-simple-select-label"> Display On</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={age}
-            label="Age"
-            onChange={handleChange}
-          >
-            <MenuItem selected value={10}>
-              Ten
-            </MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-        </FormControl>
-
-        <TextField
-          style={{ width: '100%', marginTop: '.5rem' }}
-          type="text"
-          label="Preparation Time"
-          variant="outlined"
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        style={{ width: '100%', textAlign: 'center' }}>
+        <MUIAutoComplete
+          control={control}
+          name="category"
+          options={toEpics}
+          renderOption={(option, { selected }) => (
+            <div
+              style={{
+                width: "100%",
+              }}
+            >
+              <p
+                style={{
+                  color: "black",
+                  marginLeft: "10px",
+                }}
+              >
+                {option.label}
+              </p>
+            </div>
+          )}
+          getOptionLabel={(option) => option.label}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              fullWidth
+              label="Select Category"
+              variant="outlined"
+            />
+          )}
         />
-        <Box sx={{ marginTop: '1rem',marginBottom:"1rem" }}>
-          <DropzoneArea
-            style={{ }}
-            // initialFiles={['https://images.pexels.com/photos/1909603/pexels-photo-1909603.jpeg']}
-            onChange={() => {}}
+
+        <HookFormTextField style={{ width: '100%', marginTop: '5px' }} variant="outlined" label={`Name`} name="name" control={control} />
+        <HookFormTextField style={{ width: '100%', marginTop: '5px' }} variant="outlined" label={`Description`} name="description" control={control} />
+        <HookFormTextField style={{ width: '100%', marginTop: '5px' }} variant="outlined" label="Price*" name="price" control={control} />
+        <HookFormTextField style={{ width: '100%', marginTop: '5px' }} variant="outlined" label="Unit" name="price" control={control} />
+        <HookFormTextField style={{ width: '100%', marginTop: '5px' }} variant="outlined" label="Preparation Time" name="price" control={control} />
+        <Box sx={{ marginTop: '1rem', marginBottom: "1rem" }}>
+          <DropzoneSection
+            showFileNames={true}
+            showPreviewsInDropzone={true}
+            setUpdateFilesToSave={setFilesToSave}
+            dropzoneText
           />
         </Box>
 
