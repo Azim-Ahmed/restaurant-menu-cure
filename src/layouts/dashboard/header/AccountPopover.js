@@ -2,6 +2,10 @@ import { useState } from 'react';
 // @mui
 import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton, Popover } from '@mui/material';
+
+import { useDispatch } from 'react-redux';
+import {logOut} from '../../../features/auth/authSlice';
+
 // mocks_
 import account from '../../../_mock/account';
 
@@ -25,6 +29,8 @@ const MENU_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function AccountPopover() {
+  const dispatch = useDispatch();
+
   const [open, setOpen] = useState(null);
 
   const handleOpen = (event) => {
@@ -33,6 +39,7 @@ export default function AccountPopover() {
 
   const handleClose = () => {
     setOpen(null);
+    dispatch(logOut())
   };
 
   return (
