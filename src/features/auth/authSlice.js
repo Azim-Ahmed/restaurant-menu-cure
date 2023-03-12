@@ -2,7 +2,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { BaseUrl } from '../../utils/baseUrl';
 
-const UserApi = `${BaseUrl}/api/v1/login`;
+const UserApi = `${BaseUrl}/api/auth/local`;
 
 export const userLogin = createAsyncThunk('user/userLogin', async (data, stateData) => {
   console.log('data is : ', data);
@@ -13,8 +13,9 @@ export const userLogin = createAsyncThunk('user/userLogin', async (data, stateDa
     body: JSON.stringify(data),
   };
   const resData = await fetch(UserApi, requestOptions).then((data) => data.json());
+  console.log("res data is : ", resData)
   const res = {
-    user: resData.result,
+    user: resData.user,
     token: '215464rq4jklajdf039230jj9sfjsdf',
   };
   console.log('res is : ', res);
