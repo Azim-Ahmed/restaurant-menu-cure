@@ -1,0 +1,61 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reataurants",
+  "info": {
+    "singularName": "reataurant",
+    "pluralName": "reataurants",
+    "displayName": "Reataurant",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "minLength": 4
+    },
+    "about": {
+      "type": "richtext"
+    },
+    "address": {
+      "type": "text"
+    },
+    "email": {
+      "type": "email"
+    },
+    "coverImage": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "currency": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::currency.currency",
+      "inversedBy": "reataurants"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category.category",
+      "mappedBy": "reataurant"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "reataurants"
+    },
+    "mobileNumber": {
+      "type": "string",
+      "minLength": 7
+    }
+  }
+}

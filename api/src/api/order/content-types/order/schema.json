@@ -1,0 +1,59 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "Order"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "orderId": {
+      "type": "text",
+      "required": true,
+      "minLength": 10,
+      "unique": true
+    },
+    "dateTIme": {
+      "type": "datetime"
+    },
+    "payment_method": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::payment-method.payment-method"
+    },
+    "order_status": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::order-status.order-status"
+    },
+    "status": {
+      "type": "integer",
+      "default": 1
+    },
+    "customer": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::customer.customer",
+      "inversedBy": "orders"
+    },
+    "totalPrice": {
+      "type": "biginteger"
+    },
+    "foods": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::food.food",
+      "mappedBy": "order"
+    },
+    "tips": {
+      "type": "biginteger"
+    },
+    "foodCount": {
+      "type": "integer"
+    }
+  }
+}

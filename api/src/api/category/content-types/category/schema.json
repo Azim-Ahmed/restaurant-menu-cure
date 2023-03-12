@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "categories",
+  "info": {
+    "singularName": "category",
+    "pluralName": "categories",
+    "displayName": "Category"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "minLength": 4
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "reataurant": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::reataurant.reataurant",
+      "inversedBy": "categories"
+    },
+    "foods": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::food.food",
+      "mappedBy": "category"
+    }
+  }
+}

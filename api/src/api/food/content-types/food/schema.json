@@ -1,0 +1,78 @@
+{
+  "kind": "collectionType",
+  "collectionName": "foods",
+  "info": {
+    "singularName": "food",
+    "pluralName": "foods",
+    "displayName": "Food"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "minLength": 3
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "price": {
+      "type": "biginteger",
+      "required": true
+    },
+    "size": {
+      "type": "string"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "featured": {
+      "type": "boolean",
+      "default": true
+    },
+    "availability": {
+      "type": "boolean",
+      "default": true
+    },
+    "soldout": {
+      "type": "boolean",
+      "default": false
+    },
+    "preparationTIme": {
+      "type": "string"
+    },
+    "images": {
+      "allowedTypes": [
+        "images",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "status": {
+      "type": "boolean",
+      "default": true
+    },
+    "labels": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::label.label",
+      "inversedBy": "foods"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "foods"
+    },
+    "order": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::order.order",
+      "inversedBy": "foods"
+    }
+  }
+}
