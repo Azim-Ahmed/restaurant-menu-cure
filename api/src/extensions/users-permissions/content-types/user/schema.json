@@ -71,11 +71,23 @@
         "images"
       ]
     },
-    "reataurants": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::reataurant.reataurant",
-      "mappedBy": "user"
+    "restaurant_name": {
+      "type": "text"
+    },
+    "location": {
+      "type": "text"
+    },
+    "restaurant_cover_photo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "mobile": {
+      "type": "string"
     }
   }
 }

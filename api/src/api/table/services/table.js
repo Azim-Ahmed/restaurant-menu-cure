@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * label service
+ * table service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::label.label');
+module.exports = createCoreService('api::table.table');

@@ -35,24 +35,6 @@
         "videos"
       ]
     },
-    "currency": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::currency.currency",
-      "inversedBy": "reataurants"
-    },
-    "categories": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::category.category",
-      "mappedBy": "reataurant"
-    },
-    "user": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "reataurants"
-    },
     "mobileNumber": {
       "type": "string",
       "minLength": 7

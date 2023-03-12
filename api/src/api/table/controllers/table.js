@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * currency controller
+ * table controller
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::currency.currency');
+module.exports = createCoreController('api::table.table');

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "order",
     "pluralName": "orders",
-    "displayName": "Order"
+    "displayName": "Order",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -17,13 +18,8 @@
       "minLength": 10,
       "unique": true
     },
-    "dateTIme": {
+    "dateTime": {
       "type": "datetime"
-    },
-    "payment_method": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::payment-method.payment-method"
     },
     "order_status": {
       "type": "relation",
@@ -34,12 +30,6 @@
       "type": "integer",
       "default": 1
     },
-    "customer": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::customer.customer",
-      "inversedBy": "orders"
-    },
     "totalPrice": {
       "type": "biginteger"
     },
@@ -49,11 +39,15 @@
       "target": "api::food.food",
       "mappedBy": "order"
     },
-    "tips": {
-      "type": "biginteger"
+    "payment": {
+      "type": "boolean",
+      "default": false
     },
-    "foodCount": {
-      "type": "integer"
+    "table": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::table.table",
+      "mappedBy": "order"
     }
   }
 }
