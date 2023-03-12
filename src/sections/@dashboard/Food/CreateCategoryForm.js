@@ -1,47 +1,29 @@
 import React from 'react';
-import { Box, TextField, Select, MenuItem, InputLabel, FormControl, Button} from '@mui/material';
+import { Box, TextField, Select, MenuItem, InputLabel, FormControl, Button } from '@mui/material';
+import { useForm } from 'react-hook-form';
+import HookFormTextField from 'src/components/Reusable/HookFormTextField';
 
 const CreateCategoryForm = () => {
-    const [age, setAge] = React.useState('');
-
-    const handleChange = (event) => {
-      setAge(event.target.value);
-    };
-  
+  const {
+    formState: { errors },
+    handleSubmit,
+    reset,
+    control,
+  } = useForm({
+    mode: "all",
+  });
+  const onSubmit = (data) => {
+    console.log({ data })
+  }
   return (
-    <Box sx={{ width: '100%',marginTop:"1rem", textAlign: 'center', padding:".5rem 1rem" }}>
-      <form style={{ width: '100%', textAlign: 'center' }}>
-        <FormControl fullWidth style={{marginTop:"1rem"}}>
-        <InputLabel id="demo-simple-select-label"> Store</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Age"
-          onChange={handleChange}
-        >
-          <MenuItem selected value={10}>Artichoke</MenuItem>
-        </Select>
-        </FormControl>
+    <Box sx={{ width: '100%', marginTop: "1rem", textAlign: 'center', padding: ".5rem 1rem" }}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        style={{ width: '100%', textAlign: 'center' }}>
+        <HookFormTextField style={{ width: '100%', marginTop: '5px' }} variant="outlined" label={`Name`} name="name" control={control} />
+        <HookFormTextField style={{ width: '100%', marginTop: '5px' }} variant="outlined" label={`Description`} name="description" control={control} />
 
-        <TextField style={{ width: '100%', marginTop: '5px' }} type="text" label="Name*" variant="outlined" />
-        <TextField style={{ width: '100%', marginTop: '5px' }} type="text" label="Description" variant="outlined" />
-        <FormControl fullWidth style={{marginTop:".5rem"}}>
-        <InputLabel id="demo-simple-select-label"> Modifier groups</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Age"
-          onChange={handleChange}
-        >
-          <MenuItem selected value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-        </FormControl>
-
-        <Button sx={{width:"100%", marginTop:"1rem"}} variant='contained'>Submit</Button>
+        <Button sx={{ width: "100%", marginTop: "1rem" }} type="submit" variant='contained'>Submit</Button>
       </form>
     </Box>
   );
