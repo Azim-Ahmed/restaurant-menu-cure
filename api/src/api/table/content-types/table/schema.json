@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tables",
+  "info": {
+    "singularName": "table",
+    "pluralName": "tables",
+    "displayName": "Table"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "order": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::order.order",
+      "inversedBy": "table"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "table",
+        "delivery",
+        "takeaway"
+      ]
+    },
+    "status": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

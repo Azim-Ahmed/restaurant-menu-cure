@@ -59,23 +59,35 @@ const CreateProductForm = () => {
         <MUIAutoComplete
           control={control}
           name="category"
-          options={toEpics}
-          renderOption={(option, { selected }) => (
-            <div
-              style={{
-                width: "100%",
-              }}
-            >
-              <p
-                style={{
-                  color: "black",
-                  marginLeft: "10px",
-                }}
-              >
-                {option.label}
-              </p>
-            </div>
-          )}
+          options={[
+            {
+              label: "azim",
+              value: "1"
+            },
+            {
+              label: "bro this is awesome",
+              value: "2"
+            }
+          ]}
+          getOptionSelected={(option, value) => {
+            return option.value === value.value;
+          }}
+          // renderOption={(option, { selected }) => (
+          //   <div
+          //     style={{
+          //       width: "100%",
+          //     }}
+          //   >
+          //     <p
+          //       style={{
+          //         color: "black",
+          //         marginLeft: "10px",
+          //       }}
+          //     >
+          //       {option.label}
+          //     </p>
+          //   </div>
+          // )}
           getOptionLabel={(option) => option.label}
           renderInput={(params) => (
             <TextField
