@@ -48,6 +48,12 @@
       "relation": "oneToOne",
       "target": "api::table.table",
       "mappedBy": "order"
+    },
+    "discount": {
+      "type": "integer"
+    },
+    "final_price": {
+      "type": "biginteger"
     }
   }
 }
