@@ -162,7 +162,7 @@ const CreateOrder = (props) => {
       }
       const orderData = {
         data:{
-          order_status : 1,
+          order_status : 3,
           totalPrice : totalPrice,
           foods : await cart?.map(i => i.id),
           qty : {
@@ -182,6 +182,7 @@ const CreateOrder = (props) => {
       modalClose();
       navigate("/dashboard/table");
     }
+
 
   return (
     <>
