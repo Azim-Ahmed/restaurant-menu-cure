@@ -18,7 +18,7 @@ import PRODUCTS from '../_mock/products';
 
 const OrderManagementPage = () => {
   const [searchParams] = useSearchParams();
-  console.log("search params is : ", searchParams.get("table"))
+  const tableId = searchParams.get("table")
   return (
     <>
       <Helmet>
@@ -30,7 +30,7 @@ const OrderManagementPage = () => {
         {/* <ProductCartWidget /> */}
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid item xs={6}>
-            <CreateOrder/>
+            <CreateOrder tableId={tableId}/>
           </Grid>
           <Grid item xs={6}>
             <CategoryAndProductList/>

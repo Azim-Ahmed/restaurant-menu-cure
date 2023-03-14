@@ -37,7 +37,7 @@ TableItemCard.propTypes = {
   index: PropTypes.number,
 };
 
-export default function TableItemCard({ table, index }) {
+export default function TableItemCard({tableId, table, index }) {
   const { name } = table;
 
   const tableType = name?.split(" ")[0];
@@ -46,7 +46,7 @@ export default function TableItemCard({ table, index }) {
     <Grid item xs={12} sm={6} md={3}>
       <Link style={{textDecoration:"none"}} to={{
         pathname: "/dashboard/order-management",
-        search: `?table=${table.id}`, 
+        search: `?table=${tableId}`, 
       }}
        >
       <Card sx={{ ":hover":{
