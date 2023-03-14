@@ -16,7 +16,7 @@ export const userLogin = createAsyncThunk('user/userLogin', async (data, stateDa
   console.log("res data is : ", resData)
   const res = {
     user: resData.user,
-    token: '215464rq4jklajdf039230jj9sfjsdf',
+    token: resData.jwt,
   };
   console.log('res is : ', res);
   return res;

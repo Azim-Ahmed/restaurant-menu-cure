@@ -12,6 +12,8 @@ import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from '../sections/@dashb
 import POSTS from '../_mock/blog';
 import {tables} from '../_mock/tables';
 
+import { useGetTablesQuery, useGetSingleTableDataQuery } from 'src/features/tables/tablesApi';
+
 // ----------------------------------------------------------------------
 
 const SORT_OPTIONS = [
@@ -23,6 +25,10 @@ const SORT_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function TablePage() {
+  const {data, isLoading, isSuccess} = useGetTablesQuery();
+
+  console.log("data is: ", data)
+
   return (
     <>
       <Helmet>
@@ -45,8 +51,8 @@ export default function TablePage() {
         </Stack> */}
 
         <Grid container spacing={3}>
-          {tables.map((table, index) => (
-            <TableItemCard key={table.id} table={table} index={index} />
+          {data?.data?.map((table, index) => (
+            <TableItemCard key={table.attributes.id} table={table.attributes} index={index} />
           ))}
         </Grid>
       </Container>

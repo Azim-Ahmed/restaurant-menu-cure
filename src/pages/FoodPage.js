@@ -20,6 +20,8 @@ import PRODUCTS from '../_mock/products';
 
 export default function FoodPage() {
   const [openFilter, setOpenFilter] = useState(false);
+  const [activeCategory, setActiveCategory] = useState(null)
+  const [activeCategoryName, setActiveCategoryName] = useState(null)
 
   const handleOpenFilter = () => {
     setOpenFilter(true);
@@ -48,10 +50,10 @@ export default function FoodPage() {
         {/* <ProductCartWidget /> */}
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid item xs={4}>
-            <CategorySection/>
+            <CategorySection setActiveCategoryName={setActiveCategoryName} activeCategory={activeCategory} setActiveCategory={setActiveCategory}/>
           </Grid>
           <Grid item xs={8}>
-            <FoodSection/>
+            <FoodSection activeCategoryName={activeCategoryName} activeCategory={activeCategory} setActiveCategory={setActiveCategory}/>
           </Grid>
         </Grid>
       </Container>

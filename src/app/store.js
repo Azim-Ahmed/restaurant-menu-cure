@@ -2,8 +2,9 @@ import { configureStore } from '@reduxjs/toolkit'
 // import { apiSlice } from '../features/api/apiSlice'
 // import filtersReducer from '../features/filters/filtersSlice'
 import filtersReducer from '../features/filters/fliterSlice'
-import { apiSlice } from '../features/api/apiSlice'
+import  apiSlice  from '../features/api/apiSlice'
 import authReducer from '../features/auth/authSlice';
+import cartReducer from '../features/cart/cartSlice';
 
 // const authMiddleware = (store) => (next) => (action) => {
 //   if (authActions.login.match(action)) {
@@ -20,6 +21,7 @@ export const store = configureStore({
     [apiSlice.reducerPath]: apiSlice.reducer,
     filter: filtersReducer,
     auth: authReducer,
+    cart:cartReducer
   },
   middleware: (getDefaultMiddlewares) =>
   {

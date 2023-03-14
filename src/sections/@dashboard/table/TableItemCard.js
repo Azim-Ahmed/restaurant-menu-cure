@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 // @mui
 import { alpha, styled } from '@mui/material/styles';
-import { Box, Link, Card, Grid, Avatar, Typography, CardContent } from '@mui/material';
+import { Box, Card, Grid, Avatar, Typography, CardContent } from '@mui/material';
+import {Link} from 'react-router-dom';
 // icons
 import TableBarIcon from '@mui/icons-material/TableBar';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
@@ -43,14 +44,22 @@ export default function TableItemCard({ table, index }) {
 
   return (
     <Grid item xs={12} sm={6} md={3}>
-      <Link style={{textDecoration:"none"}} href='/dashboard/order-management'>
+      <Link style={{textDecoration:"none"}} to={{
+        pathname: "/dashboard/order-management",
+        search: `?table=${table.id}`, 
+      }}
+      //  href={`/dashboard/order-management/`}
+       >
       <Card sx={{ ":hover":{
-        boxShadow:"rgba(149, 157, 165, 0.2) 0px 8px 24px"
-      }}}>
+        boxShadow:"rgba(149, 157, 165, 0.2) 0px 8px 24px",
+
+      },
+      bgcolor: table.status == false ? colors.primary : "white",
+      color: table.status == false ? "white" : "black"
+      }}>
         <CardContent sx={{textAlign:'center'}}>
           <Box>
-            {tableType === "Delivery" ? <DeliveryDiningIcon sx={{color:colors.black2, fontSize:100}}/> : tableType === "Take" ? <ShoppingBagIcon sx={{color:colors.third, fontSize:100}}/> : <TableBarIcon sx={{color:colors.third, fontSize:100}}/>}
-            
+            {table.type === "delivery" ? <DeliveryDiningIcon sx={{ color: table.status == false? "white" :colors.black2, fontSize:100}}/> : table.type === "takeaway" ? <ShoppingBagIcon sx={{ color: table.status == false? "white" :colors.black2, fontSize:100}}/> : <TableBarIcon sx={{ color: table.status == false? "white" :colors.black2, fontSize:100}}/>}
           </Box>
           <Typography
             color="inherit"
