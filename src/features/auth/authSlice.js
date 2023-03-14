@@ -31,12 +31,7 @@ export const userSignup = createAsyncThunk('user/usersignup', async (data, state
   };
   const resData = await fetch(UserApi / "register", requestOptions).then((data) => data.json());
   console.log("res data is : ", resData)
-  const res = {
-    user: resData.user,
-    token: resData.jwt,
-  };
-  console.log('res is : ', res);
-  return res;
+
 });
 
 const localData = JSON.parse(localStorage.getItem('userData'));
