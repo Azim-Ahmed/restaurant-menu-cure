@@ -145,7 +145,7 @@ const CreateOrder = (props) => {
           table : tableId
         }
       }
-     const data =  await updateOrder({id:getFullOrder.data.id, submitData:orderData});
+     const data =  await updateOrder({id:getFullOrder?.data?.id, submitData:orderData});
 
      console.log("created order data is : ", data);
      const updatedTable = await updateTable({id:tableId, submitData:{data:{status:0}}})
