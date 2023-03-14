@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 // @mui
 import { styled, alpha } from '@mui/material/styles';
 import {
@@ -37,9 +38,9 @@ import BasicModal from '../../components/ui/BasicModal';
 import CreateProductForm from '../@dashboard/Food/CreateProductForm';
 import PaymentSection from './PaymentSection';
 
-import {addToCart, removeFromCart, decreaseProductQuantity, resetCart} from '../../features/cart/cartSlice';
-import { useCreateOrderMutation, useUpdateOrderMutation } from 'src/features/orders/ordersApi';
-import { useUpdateTableMutation } from 'src/features/tables/tablesApi';
+import {addToCart,setInital, removeFromCart, decreaseProductQuantity, resetCart} from '../../features/cart/cartSlice';
+import { useCreateOrderMutation, useUpdateOrderMutation, useGetFullOrderQuery } from 'src/features/orders/ordersApi';
+import { useUpdateTableMutation, useGetSingleTableDataQuery,} from 'src/features/tables/tablesApi';
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
@@ -51,7 +52,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
   }));
 
-const CreateOrder = () => {
+const CreateOrder = (props) => {
+  const {tableId} = props;
+  const navigate = useNavigate();
     const [modalOpen, setModalOpen]= useState(false);
     const modalClose =()=>{
       setModalOpen(false)
@@ -60,7 +63,10 @@ const CreateOrder = () => {
 
     const [createOrder] =useCreateOrderMutation();
     const [updateTable] =useUpdateTableMutation();
+    const {data:getSingleTableData} = useGetSingleTableDataQuery(tableId);
+    const {data:getFullOrder} = useGetFullOrderQuery(getSingleTableData?.data?.attributes?.order?.data?.id);
 
+    // console.log("")
     
     let totalPrice = 0;
     const [finalPrice, setFinalPrice] = useState();
@@ -69,21 +75,54 @@ const CreateOrder = () => {
     const {cart} = useSelector(state=>state.cart);
 
 
+    console.log("get single table data is : ", getSingleTableData?.data?.attributes?.order?.data?.id )
+    console.log("full order data is: ", getFullOrder)
+    useEffect(()=>{
+    //  const d =  getSingleTableData();
+    },)
 
     // console.log("cart is : ", cart);
     
     // const totalPrice = cart?.length > 0 && cart?.reduce((acc,cur)=>acc.price + (Number(cur.price) * cur.food_qty),0)
     
     totalPrice = cart?.length > 0 && cart?.reduce(function(accumulator, currentValue) {
-      console.log("acc is : ", accumulator, "current value is :", currentValue)
+      // console.log("acc is : ", accumulator, "current value is :", currentValue)
       return Number(accumulator)  + (Number(currentValue.price) * Number(currentValue.food_qty)) ;
       }, 0);
       
     // console.log("total price is : ", totalPrice);
 
+    const getQty = (id) =>{
+    //  const data = getFullOrder?.data?.attributes?qty?.foodCount
+     const data = getFullOrder?.data?.attributes?.qty?.foodCount?.data;
+    //  const rData = data.find(d=>d.food_id == id);
+      // return rData.food_qty
+      return 1
+    }
+
     useEffect(()=>{
       setFinalPrice(totalPrice)
     },[totalPrice]);
+
+    useState(()=>{
+      
+      if(getFullOrder){
+        const cartData = getFullOrder?.data?.attributes?.foods?.data;
+        const setUpdate = cartData.map(d=>{
+          return (
+            {
+              id:d.id,
+              ...d.attributes,
+              food_qty: 1
+            }
+          )
+        })
+        console.log("cart Data is : ", cartData)
+        dispatch(setInital(setUpdate))
+      }else{
+        dispatch(setInital([]))
+      }
+    },[getFullOrder])
 
     const createOrderQty =async ()=>{
       if(!cart){
@@ -102,21 +141,46 @@ const CreateOrder = () => {
              return {food_id:i.id, food_qty:i.food_qty}
             })
           },
-          table : 2
+          table : tableId
         }
       }
      const data =  await createOrder(orderData);
 
      console.log("created order data is : ", data);
-     const updatedTable = await updateTable({id:2, submitData:{data:{status:0}}})
+     const updatedTable = await updateTable({id:tableId, submitData:{data:{status:0}}})
      
      console.log("updated table is :  : ", updatedTable);
-     alert("Your order is created")
+     alert("Your order is created");
     }
 
-    const paymentOrder = ()=>{
+    const paymentOrder =async ()=>{
+      if(!cart){
+        return
+      }
+      if(cart.length < 1){
+        return
+      }
+      const orderData = {
+        data:{
+          order_status : 1,
+          totalPrice : totalPrice,
+          foods : await cart?.map(i => i.id),
+          qty : {
+            foodCount : await cart?.map((i)=>{
+             return {food_id:i.id, food_qty:i.food_qty}
+            })
+          },
+          table : tableId
+        }
+      }
+     const data =  await createOrder(orderData);
+
+     console.log("created order data is : ", data);
+     const updatedTable = await updateTable({id:tableId, submitData:{data:{status:1}}});
+      console.log("table status is : ", updateTable)
       alert("orderSubmited");
       modalClose();
+      navigate("/dashboard/table");
     }
 
   return (
