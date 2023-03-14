@@ -18,29 +18,53 @@ import { useForm } from 'react-hook-form';
 import MUIAutoComplete from 'src/components/Reusable/MuiAutoComplete';
 import DropzoneSection from 'src/components/Reusable/DropzoneSection';
 
-const CreateProductForm = () => {
+import { useCreateFoodMutation, useUpdateFoodMutation } from '../../../features/foods/foodsApi';
+
+const CreateProductForm = (props) => {
+  const { submitType, category, defaultData, modalClose, id } = props;
   const [filesToSave, setFilesToSave] = React.useState([]);
+  const [createFood] = useCreateFoodMutation();
+  const [updateFood] = useUpdateFoodMutation();
   const {
     formState: { errors },
     handleSubmit,
     reset,
     control,
   } = useForm({
-    mode: "all",
+    mode: 'all',
   });
-  const onSubmit = (data) => {
-    console.log({ data })
-  }
+  const onSubmit = async (data) => {
+    console.log('Food data is : ', data);
+    const submitData = {
+      data: {
+        name: data?.name,
+        description: data?.description,
+        price: data?.price,
+        unit: data?.unit,
+        preparationTIme: data?.preparationTIme,
+        status: 1,
+        category: category,
+      },
+    };
+
+    if (submitType === 'update') {
+      await updateFood({ id: id, submitData });
+    } else {
+      await createFood(submitData);
+    }
+    modalClose();
+    console.log('Food is created');
+  };
   const toEpics = [
     {
-      label: "azim",
-      value: "1"
+      label: 'azim',
+      value: '1',
     },
     {
-      label: "bro this is awesome",
-      value: "2"
-    }
-  ]
+      label: 'bro this is awesome',
+      value: '2',
+    },
+  ];
   return (
     <Box
       sx={{
@@ -52,11 +76,8 @@ const CreateProductForm = () => {
         padding: '.5rem 1rem',
       }}
     >
-
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        style={{ width: '100%', textAlign: 'center' }}>
-        <MUIAutoComplete
+      <form onSubmit={handleSubmit(onSubmit)} style={{ width: '100%', textAlign: 'center' }}>
+        {/* <MUIAutoComplete
           control={control}
           name="category"
           options={[
@@ -97,24 +118,60 @@ const CreateProductForm = () => {
               variant="outlined"
             />
           )}
-        />
+        /> */}
 
-        <HookFormTextField style={{ width: '100%', marginTop: '5px' }} variant="outlined" label={`Name`} name="name" control={control} />
-        <HookFormTextField style={{ width: '100%', marginTop: '5px' }} variant="outlined" label={`Description`} name="description" control={control} />
-        <HookFormTextField style={{ width: '100%', marginTop: '5px' }} variant="outlined" label="Price*" name="price" control={control} />
-        <HookFormTextField style={{ width: '100%', marginTop: '5px' }} variant="outlined" label="Unit" name="price" control={control} />
-        <HookFormTextField style={{ width: '100%', marginTop: '5px' }} variant="outlined" label="Preparation Time" name="price" control={control} />
-        <Box sx={{ marginTop: '1rem', marginBottom: "1rem" }}>
+        <HookFormTextField
+          style={{ width: '100%', marginTop: '5px' }}
+          variant="outlined"
+          label={`Name`}
+          name="name"
+          defaultValue={defaultData?.name}
+          control={control}
+        />
+        <HookFormTextField
+          style={{ width: '100%', marginTop: '5px' }}
+          variant="outlined"
+          label={`Description`}
+          name="description"
+          defaultValue={defaultData?.description}
+          control={control}
+        />
+        <HookFormTextField
+          style={{ width: '100%', marginTop: '5px' }}
+          variant="outlined"
+          label="Price*"
+          type="number"
+          name="price"
+          defaultValue={defaultData?.price}
+          control={control}
+        />
+        <HookFormTextField
+          style={{ width: '100%', marginTop: '5px' }}
+          variant="outlined"
+          label="Unit"
+          name="unit"
+          defaultValue={defaultData?.unit}
+          control={control}
+        />
+        <HookFormTextField
+          style={{ width: '100%', marginTop: '5px' }}
+          variant="outlined"
+          label="Preparation Time"
+          name="preparationTIme"
+          defaultValue={defaultData?.preparationTIme}
+          control={control}
+        />
+        {/* <Box sx={{ marginTop: '1rem', marginBottom: '1rem' }}>
           <DropzoneSection
             showFileNames={true}
             showPreviewsInDropzone={true}
             setUpdateFilesToSave={setFilesToSave}
             dropzoneText
           />
-        </Box>
+        </Box> */}
 
-        <Button sx={{ width: '100%', marginTop: '1rem' }} variant="contained">
-          Submit
+        <Button type="submit" sx={{ width: '100%', marginTop: '1rem' }} variant="contained">
+          {submitType === 'update' ? 'Update' : 'Create'}
         </Button>
       </form>
     </Box>

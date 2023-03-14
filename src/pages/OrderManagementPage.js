@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
-
+import { useSearchParams } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -17,6 +17,8 @@ import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } fro
 import PRODUCTS from '../_mock/products';
 
 const OrderManagementPage = () => {
+  const [searchParams] = useSearchParams();
+  console.log("search params is : ", searchParams.get("table"))
   return (
     <>
       <Helmet>

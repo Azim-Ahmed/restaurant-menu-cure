@@ -24,7 +24,7 @@ export default function LoginForm(props) {
 
   const handleClick =async () => {
     const loginData = {
-      mobile_number: email,
+      identifier: email,
       password
     }
    await dispatch(submitLogin(loginData))
