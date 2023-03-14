@@ -30,7 +30,7 @@ import {
 export default function DashboardAppPage() {
   const theme = useTheme();
 
-  const handleClickChip = () => {};
+  const handleClickChip = () => { };
 
   const bull = (
     <Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
@@ -64,7 +64,7 @@ export default function DashboardAppPage() {
   return (
     <>
       <Helmet>
-        <title> Dashboard | Minimal UI </title>
+        <title> Dashboard | Restaurant System </title>
       </Helmet>
 
       <Container maxWidth="xl">
@@ -163,8 +163,8 @@ export default function DashboardAppPage() {
           }}
         >
           <Typography sx={{ fontSize: '1.3rem', fontWeight: '600' }}>Order Analytics</Typography>
-        
-          <Table sx={{marginTop:"1rem"}}>
+
+          <Table sx={{ marginTop: "1rem" }}>
             <TableHead>
               <TableRow>
                 <TableCell>Food name</TableCell>

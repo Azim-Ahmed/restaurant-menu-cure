@@ -54,7 +54,7 @@ export default function LoginPage() {
   return (
     <>
       <Helmet>
-        <title> Login | Minimal UI </title>
+        <title> Login | Restaurant System </title>
       </Helmet>
 
       <StyledRoot>
@@ -106,7 +106,7 @@ export default function LoginPage() {
               </Typography>
             </Divider>
 
-            <LoginForm submitLogin = {userLogin}/>
+            <LoginForm submitLogin={userLogin} />
           </StyledContent>
         </Container>
       </StyledRoot>
