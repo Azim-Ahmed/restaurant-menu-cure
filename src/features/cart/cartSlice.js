@@ -9,6 +9,9 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
+    setInital: (state,action)=>{
+        state.cart = action.payload
+    },
     addToCart: (state, action) => {
         // console.log("action payload is : ", action)
       // Find product that already exist in the cart
@@ -60,6 +63,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, decreaseProductQuantity, resetCart } =
+export const {setInital, addToCart, removeFromCart, decreaseProductQuantity, resetCart } =
   cartSlice.actions;
 export default cartSlice.reducer;

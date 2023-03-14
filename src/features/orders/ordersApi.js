@@ -33,7 +33,11 @@ const ordersApi = apiSlice.injectEndpoints({
     getOrders: builder.query({
       query: () => '/api/categories',
       providesTags: ['Order'],
-    })
+    }),
+    getFullOrder: builder.query({
+      query: (id) => `/api/orders/${id}?populate=foods`,
+      providesTags: ['Order'],
+    }),
   }),
   overrideExisting: true,
 });
@@ -41,5 +45,6 @@ const ordersApi = apiSlice.injectEndpoints({
 export const {
   useCreateOrderMutation,
   useUpdateOrderMutation,
+  useGetFullOrderQuery,
   useGetOrdersQuery
 } = ordersApi;

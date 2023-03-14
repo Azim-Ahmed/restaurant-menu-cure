@@ -52,7 +52,7 @@ export default function TablePage() {
 
         <Grid container spacing={3}>
           {data?.data?.map((table, index) => (
-            <TableItemCard key={table.attributes.id} table={table.attributes} index={index} />
+            <TableItemCard key={table.attributes.id} tableId ={table.id} table={table.attributes} index={index} />
           ))}
         </Grid>
       </Container>
