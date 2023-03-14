@@ -14,6 +14,6 @@ Restaurant Management System is for creating , managing order by table wise.
  - strapi
  - postgresql
 
-Features:
+## Features:
 - Menu management: the ability to add/edit/remove menu items, set prices, manage specials and discounts
 - Order management: process and track customer orders, calculate bills, handle takeout/delivery orders
