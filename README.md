@@ -13,6 +13,7 @@ Restaurant Management System is for creating , managing order by table wise.
  - axios
  - strapi
  - postgresql
+ -Material -UI
 
 ## Features:
 - Menu management: the ability to add/edit/remove menu items, set prices, manage specials and discounts
