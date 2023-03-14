@@ -90,7 +90,7 @@ export default function DashboardAppPage() {
               color: 'white',
             }}
           >
-            Hi, {user?.username}
+            {user?.restaurant_name}
           </Typography>
           {/* <Box sx={{ textAlign: 'right' }}>
             <Typography>Your Customer App url</Typography>
