@@ -21,6 +21,23 @@ export const userLogin = createAsyncThunk('user/userLogin', async (data, stateDa
   console.log('res is : ', res);
   return res;
 });
+export const userSignup = createAsyncThunk('user/usersignup', async (data, stateData) => {
+  console.log('data is : ', data);
+  console.log('state is : ', stateData.getState);
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  };
+  const resData = await fetch(UserApi / "register", requestOptions).then((data) => data.json());
+  console.log("res data is : ", resData)
+  const res = {
+    user: resData.user,
+    token: resData.jwt,
+  };
+  console.log('res is : ', res);
+  return res;
+});
 
 const localData = JSON.parse(localStorage.getItem('userData'));
 

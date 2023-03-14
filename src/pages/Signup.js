@@ -5,7 +5,7 @@ import { styled } from '@mui/material/styles';
 import { Link, Container, Typography, Divider, Stack, Button } from '@mui/material';
 
 // redux
-import { userLogin } from '../features/auth/authSlice';
+import { userSignup } from '../features/auth/authSlice';
 
 // hooks
 import useResponsive from '../hooks/useResponsive';
@@ -14,6 +14,7 @@ import Logo from '../components/logo';
 import Iconify from '../components/iconify';
 // sections
 import { LoginForm } from '../sections/auth/login';
+import SignUpForm from 'src/sections/auth/Signup/SignUpForm';
 
 
 
@@ -48,7 +49,7 @@ const StyledContent = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function LoginPage() {
+export default function Signup() {
     const mdUp = useResponsive('up', 'md');
 
     return (
@@ -85,28 +86,13 @@ export default function LoginPage() {
                             Don’t have an account? {''}
                             <Link variant="subtitle2">Get started</Link>
                         </Typography>
-
-                        <Stack direction="row" spacing={2}>
-                            <Button fullWidth size="large" color="inherit" variant="outlined">
-                                <Iconify icon="eva:google-fill" color="#DF3E30" width={22} height={22} />
-                            </Button>
-
-                            <Button fullWidth size="large" color="inherit" variant="outlined">
-                                <Iconify icon="eva:facebook-fill" color="#1877F2" width={22} height={22} />
-                            </Button>
-
-                            <Button fullWidth size="large" color="inherit" variant="outlined">
-                                <Iconify icon="eva:twitter-fill" color="#1C9CEA" width={22} height={22} />
-                            </Button>
-                        </Stack>
-
                         <Divider sx={{ my: 3 }}>
                             <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                                 OR
                             </Typography>
                         </Divider>
 
-                        <LoginForm submitLogin={userLogin} />
+                        <SignUpForm submitLogin={userSignup} />
                     </StyledContent>
                 </Container>
             </StyledRoot>

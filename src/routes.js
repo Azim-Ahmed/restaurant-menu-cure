@@ -10,6 +10,7 @@ import DashboardAppPage from './pages/DashboardAppPage';
 import FoodPage from './pages/FoodPage';
 import TablePage from './pages/TablePage';
 import OrderManagementPage from './pages/OrderManagementPage';
+import Signup from './pages/Signup';
 
 // ----------------------------------------------------------------------
 
@@ -30,6 +31,10 @@ export default function Router() {
     {
       path: 'login',
       element: <LoginPage />,
+    },
+    {
+      path: 'signup',
+      element: <Signup />,
     },
     {
       element: <SimpleLayout />,
