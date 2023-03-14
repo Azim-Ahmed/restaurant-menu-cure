@@ -14,11 +14,11 @@ const navConfig = [
     path: '/dashboard/app',
     icon: <GridViewIcon />,
   },
-  {
-    title: 'user',
-    path: '/dashboard/user',
-    icon: icon('ic_user'),
-  },
+  // {
+  //   title: 'user',
+  //   path: '/dashboard/user',
+  //   icon: icon('ic_user'),
+  // },
   {
     title: 'Food',
     path: '/dashboard/food',
