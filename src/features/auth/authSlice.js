@@ -26,13 +26,13 @@ const localData = JSON.parse(localStorage.getItem('userData'));
 let initialState;
 
 if (localData) {
-    initialState = localData
-}else{
-    initialState = {
-        user: null,
-        token: null,
-        loading: false,
-      };
+  initialState = localData
+} else {
+  initialState = {
+    user: null,
+    token: null,
+    loading: false,
+  };
 }
 
 const authSlice = createSlice({
