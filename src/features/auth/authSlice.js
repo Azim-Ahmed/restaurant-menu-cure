@@ -29,7 +29,7 @@ export const userSignup = createAsyncThunk('user/usersignup', async (data, state
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
   };
-  const resData = await fetch(UserApi / "register", requestOptions).then((data) => data.json());
+  const resData = await fetch(UserApi + "/" + "register", requestOptions).then((data) => data.json());
   console.log("res data is : ", resData)
 
 });
