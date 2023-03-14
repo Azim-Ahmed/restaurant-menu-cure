@@ -24,6 +24,7 @@ import {
   AppCurrentSubject,
   AppConversionRates,
 } from '../sections/@dashboard/app';
+import { useSelector } from 'react-redux';
 
 // ----------------------------------------------------------------------
 
@@ -31,6 +32,7 @@ export default function DashboardAppPage() {
   const theme = useTheme();
 
   const handleClickChip = () => { };
+  const { user } = useSelector(state => state.auth)
 
   const bull = (
     <Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
@@ -88,9 +90,9 @@ export default function DashboardAppPage() {
               color: 'white',
             }}
           >
-            Hi, Raihan
+            Hi, {user?.username}
           </Typography>
-          <Box sx={{ textAlign: 'right' }}>
+          {/* <Box sx={{ textAlign: 'right' }}>
             <Typography>Your Customer App url</Typography>
             <Box
               sx={{
@@ -103,7 +105,7 @@ export default function DashboardAppPage() {
               <ContentCopyIcon sx={{ cursor: 'pointer' }} />
               <Typography>https://menutigr.com/artichoke-144531222993074</Typography>
             </Box>
-          </Box>
+          </Box> */}
         </Box>
         {/* Weeks & date section */}
         <Box>
