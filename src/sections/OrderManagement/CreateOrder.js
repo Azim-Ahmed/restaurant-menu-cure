@@ -77,7 +77,7 @@ const CreateOrder = (props) => {
 
 
     console.log("get single table data is : ", getSingleTableData?.data?.attributes?.order?.data?.id )
-    console.log("full order data is: ", getFullOrder.data.id)
+    console.log("full order data is: ", getFullOrder)
     useEffect(()=>{
     //  const d =  getSingleTableData();
     },)
