@@ -32,6 +32,7 @@ specifiers:
   react-redux: ^8.0.5
   react-router-dom: ^6.4.2
   react-scripts: ^5.0.1
+  react-toastify: ^9.1.1
   simplebar-react: ^2.4.3
   web-vitals: ^3.0.3
 
@@ -64,6 +65,7 @@ dependencies:
   react-redux: 8.0.5_biqbaboplfbrettd7655fr4n2y
   react-router-dom: 6.8.0_biqbaboplfbrettd7655fr4n2y
   react-scripts: 5.0.1_react@18.2.0
+  react-toastify: 9.1.1_biqbaboplfbrettd7655fr4n2y
   simplebar-react: 2.4.3_biqbaboplfbrettd7655fr4n2y
   web-vitals: 3.1.1
 
@@ -9114,6 +9116,17 @@ packages:
       - webpack-cli
       - webpack-hot-middleware
       - webpack-plugin-serve
+    dev: false
+
+  /react-toastify/9.1.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-pkFCla1z3ve045qvjEmn2xOJOy4ZciwRXm1oMPULVkELi5aJdHCN/FHnuqXq8IwGDLB7PPk2/J6uP9D8ejuiRw==}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      clsx: 1.2.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /react-transition-group/4.4.5_biqbaboplfbrettd7655fr4n2y:

@@ -12,7 +12,7 @@ const navConfig = [
   {
     title: 'dashboard',
     path: '/dashboard/app',
-    icon: <GridViewIcon/>,
+    icon: <GridViewIcon />,
   },
   {
     title: 'user',
@@ -22,23 +22,23 @@ const navConfig = [
   {
     title: 'Food',
     path: '/dashboard/food',
-    icon: <FastfoodIcon/>,
+    icon: <FastfoodIcon />,
   },
   {
     title: 'Table',
     path: '/dashboard/table',
-    icon: <TableBarIcon/>
+    icon: <TableBarIcon />
   },
-  {
-    title: 'login',
-    path: '/login',
-    icon: icon('ic_lock'),
-  },
-  {
-    title: 'Not found',
-    path: '/404',
-    icon: icon('ic_disabled'),
-  },
+  // {
+  //   title: 'login',
+  //   path: '/login',
+  //   icon: icon('ic_lock'),
+  // },
+  // {
+  //   title: 'Not found',
+  //   path: '/404',
+  //   icon: icon('ic_disabled'),
+  // },
 ];
 
 export default navConfig;
