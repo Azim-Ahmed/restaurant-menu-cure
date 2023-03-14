@@ -77,7 +77,7 @@ const CreateOrder = (props) => {
 
 
     console.log("get single table data is : ", getSingleTableData?.data?.attributes?.order?.data?.id )
-    console.log("full order data is: ", getFullOrder.data.id)
+    console.log("full order data is: ", getFullOrder)
     useEffect(()=>{
     //  const d =  getSingleTableData();
     },)
@@ -145,7 +145,7 @@ const CreateOrder = (props) => {
           table : tableId
         }
       }
-     const data =  await updateOrder({id:getFullOrder.data.id, submitData:orderData});
+     const data =  await updateOrder({id:getFullOrder?.data?.id, submitData:orderData});
 
      console.log("created order data is : ", data);
      const updatedTable = await updateTable({id:tableId, submitData:{data:{status:0}}})
