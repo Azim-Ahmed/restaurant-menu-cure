@@ -12,12 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "orderId": {
-      "type": "text",
-      "required": true,
-      "minLength": 10,
-      "unique": true
-    },
     "dateTime": {
       "type": "datetime"
     },
@@ -48,6 +42,15 @@
       "relation": "oneToOne",
       "target": "api::table.table",
       "mappedBy": "order"
+    },
+    "discount": {
+      "type": "integer"
+    },
+    "final_price": {
+      "type": "biginteger"
+    },
+    "qty": {
+      "type": "json"
     }
   }
 }
