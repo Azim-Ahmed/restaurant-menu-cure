@@ -1,6 +1,6 @@
 import apiSlice from '../api/apiSlice';
 
-const ordersApi = apiSlice.injectEndpoints({
+const queryApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createOrder: builder.mutation({
       query: (data) => ({
@@ -37,12 +37,12 @@ const ordersApi = apiSlice.injectEndpoints({
       query: () => '/api/categories',
       providesTags: ['Order'],
     }),
-    getFullOrder: builder.query({
-      query: (id) => `/api/orders/${id}?populate=foods`,
+    getCurrentMonthOrder: builder.query({
+      query: (id) => `api/orders?createdAt_gte=2023-03-25&createdAt_lte=2023-03-25`,
       providesTags: ['Order'],
     }),
   }),
   overrideExisting: true,
 });
 
-export const { useCreateOrderMutation, useUpdateOrderMutation, useGetFullOrderQuery, useGetOrdersQuery } = ordersApi;
+export const {useGetCurrentMonthOrderQuery } = queryApi;

@@ -16,7 +16,7 @@ const tablesApi = apiSlice.injectEndpoints({
       providesTags: ['Table'],
     }),
     getSingleTableData: builder.query({
-      query: (id) => `/api/tables/${id}?populate=order`,
+      query: (id) => `/api/tables/${id}?populate=order.foods`,
       providesTags: ['Table'],
     }),
   }),
