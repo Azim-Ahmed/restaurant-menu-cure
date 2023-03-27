@@ -2,28 +2,6 @@ import apiSlice from '../api/apiSlice';
 
 const queryApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    createOrder: builder.mutation({
-      query: (data) => ({
-        url: '/api/orders',
-        method: 'POST',
-        body: data,
-      }),
-      invalidatesTags: ['Order'],
-      providesTags: ['Order'],
-    }),
-    updateOrder: builder.mutation({
-      query: ({ id, submitData }) => {
-        console.log('UPDATE ORDER IS :', submitData)
-       return ({
-          url: `/api/orders/${id}`,
-          method: 'PUT',
-          body: submitData,
-        });
-      },
-      invalidatesTags: ['Order'],
-      providesTags: ['Order'],
-    }),
-
     // deleteCategory: builder.mutation({
     //   query: (id) => ({
     //     url: `/api/categories/${id}`,
@@ -33,8 +11,10 @@ const queryApi = apiSlice.injectEndpoints({
     //   providesTags: ['Category'],
     // }),
 
-    getOrders: builder.query({
-      query: () => '/api/categories',
+    getOrdersByDate: builder.query({
+      query: ({ ltD, gtD }) => {
+        return `http://localhost:1337/api/orders?createdAt_gte=${gtD}&createdAt_lte=${ltD}`;
+      },
       providesTags: ['Order'],
     }),
     getCurrentMonthOrder: builder.query({
@@ -45,4 +25,4 @@ const queryApi = apiSlice.injectEndpoints({
   overrideExisting: true,
 });
 
-export const {useGetCurrentMonthOrderQuery } = queryApi;
+export const { useGetCurrentMonthOrderQuery, useGetOrdersByDateQuery } = queryApi;

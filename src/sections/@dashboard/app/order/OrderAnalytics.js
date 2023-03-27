@@ -23,14 +23,15 @@ const OrderAnalytics = () => {
   var check = moment(new Date(), 'YYYY/MM/DD');
   const day = check.format('D');
   const month = check.format('M');
+  const monthName = check.format('MMMM');
   const year = check.format('YYYY');
-  console.log('check is : ', day, month, year);
+  // console.log('check is : ', day, month, year);
 
   const { data: currentMothOrders } = useGetCurrentMonthOrderQuery();
 
   const [allLabels, setAllLabels] = useState([]);
   const arr = Array.from({ length: day }, (_, index) => index + 1);
-  console.log('current month orders is : ', currentMothOrders?.data);
+  // console.log('current month orders is : ', currentMothOrders?.data);
 
   const options = {
     responsive: true,
@@ -39,8 +40,11 @@ const OrderAnalytics = () => {
         position: 'top',
       },
       title: {
-        //   display: true,
-        text: 'Chart.js Line Chart',
+        display: true,
+        text: "Current month's order analytics",
+        font:{
+          size:20
+        }
       },
     },
   };
@@ -72,7 +76,7 @@ const OrderAnalytics = () => {
     });
   };
 
-  console.log('all labels is : ', allLabels);
+  // console.log('all labels is : ', allLabels);
 
   useEffect(() => {
     setupAllLabels(currentMothOrders?.data);
@@ -82,16 +86,17 @@ const OrderAnalytics = () => {
     labels: allLabels.map((l) => l.date),
     datasets: [
       {
-        label: 'Daily sale in current month',
+        label: monthName,
         // data: [10, 100,50,80,200],
         data: allLabels.map((l) => Number(l.totalPrice)),
         borderColor: 'rgb(53, 162, 235)',
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        backgroundColor: 'rgb(53, 162, 235)',
+        fontSize: '70px',
       },
     ],
   };
 
-  console.log('faker value is : ');
+  // console.log('faker value is : ');
   return (
     <>
       <Box
@@ -103,7 +108,7 @@ const OrderAnalytics = () => {
           borderRadius: '.5rem',
         }}
       >
-        <Typography sx={{ fontSize: '1.3rem', fontWeight: '600' }}>Order Analytics</Typography>
+        {/* <Typography sx={{ fontSize: '1.3rem', fontWeight: '600' }}>Order Analytics</Typography> */}
 
         <Line options={options} data={data} />
       </Box>

@@ -13,11 +13,11 @@ const tablesApi = apiSlice.injectEndpoints({
     }),
     getTables: builder.query({
       query: () => '/api/tables',
-      providesTags: ['Table'],
+      providesTags: ['Table','Order'],
     }),
     getSingleTableData: builder.query({
       query: (id) => `/api/tables/${id}?populate=order.foods`,
-      providesTags: ['Table'],
+      providesTags: ['Table','Order'],
     }),
   }),
   overrideExisting: true,

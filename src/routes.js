@@ -11,6 +11,7 @@ import FoodPage from './pages/FoodPage';
 import TablePage from './pages/TablePage';
 import OrderManagementPage from './pages/OrderManagementPage';
 import Signup from './pages/Signup';
+import OrdersPage from './pages/OrdersPage';
 
 // ----------------------------------------------------------------------
 
@@ -26,6 +27,7 @@ export default function Router() {
         { path: 'food', element: <FoodPage /> },
         { path: 'table', element: <TablePage /> },
         { path: 'order-management', element: <OrderManagementPage /> },
+        { path: 'orders', element: <OrdersPage /> },
       ],
     },
     {

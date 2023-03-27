@@ -2,6 +2,7 @@
 import GridViewIcon from '@mui/icons-material/GridView';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 import TableBarIcon from '@mui/icons-material/TableBar';
+import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import SvgColor from '../../../components/svg-color';
 
 // ----------------------------------------------------------------------
@@ -28,6 +29,11 @@ const navConfig = [
     title: 'Table',
     path: '/dashboard/table',
     icon: <TableBarIcon />
+  },
+  {
+    title: 'Orders',
+    path: '/dashboard/orders',
+    icon: <AssignmentTurnedInIcon />
   },
   // {
   //   title: 'login',

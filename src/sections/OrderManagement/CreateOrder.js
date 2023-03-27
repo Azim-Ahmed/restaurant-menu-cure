@@ -71,9 +71,12 @@ const CreateOrder = (props) => {
   const [createOrder] = useCreateOrderMutation();
   const [updateOrder] = useUpdateOrderMutation();
   const [updateTable] = useUpdateTableMutation();
-  const { data: getSingleTableData,isLoading:getTableLoading, isSuccess:getTableSuccess } = useGetSingleTableDataQuery(tableId);
+  const {
+    data: getSingleTableData,
+    isLoading: getTableLoading,
+    isSuccess: getTableSuccess,
+  } = useGetSingleTableDataQuery(tableId);
   // const tableOrder = getSingleTableData?.data?.attributes?.order?.data;
-
 
   let totalPrice = 0;
   const [finalPrice, setFinalPrice] = useState();
@@ -118,8 +121,9 @@ const CreateOrder = (props) => {
   //   }
   // },[getSingleTableData, tableOrder]);
 
-  useEffect(()=>{
-    const tableOrder =  getSingleTableData?.data?.attributes?.order?.data
+  useEffect(() => {
+    const tableOrder = getSingleTableData?.data?.attributes?.order?.data;
+    console.log('table order is : ', tableOrder);
     if (tableOrder) {
       setOrderIsUpdate(true);
       console.log('im called from existing foods');
@@ -143,9 +147,7 @@ const CreateOrder = (props) => {
       setOrderIsUpdate(false);
       dispatch(setInital([]));
     }
-
-  },[getSingleTableData]);
-
+  }, [getSingleTableData]);
 
   const createOrderQty = async () => {
     if (!cart) {
@@ -169,7 +171,10 @@ const CreateOrder = (props) => {
     };
 
     if (orderIsUpdate) {
-      const data = await updateOrder({id: getSingleTableData?.data?.attributes?.order?.data?.id, submitData:orderData});
+      const data = await updateOrder({
+        id: getSingleTableData?.data?.attributes?.order?.data?.id,
+        submitData: orderData,
+      });
       console.log('updated order data is : ', data);
       alert('your order is updated');
     } else {
@@ -192,6 +197,7 @@ const CreateOrder = (props) => {
       data: {
         order_status: 3,
         totalPrice: totalPrice,
+        final_price: finalPrice,
         foods: await cart?.map((i) => i.id),
         qty: {
           foodCount: await cart?.map((i) => {
@@ -201,11 +207,14 @@ const CreateOrder = (props) => {
         table: tableId,
       },
     };
-    const data = await createOrder(orderData);
 
+    const data = await updateOrder({
+      id: getSingleTableData?.data?.attributes?.order?.data?.id,
+      submitData: orderData,
+    });
     console.log('created order data is : ', data);
-    const updatedTable = await updateTable({ id: tableId, submitData: { data: { status: 1 } } });
-    console.log('table status is : ', updateTable);
+    const updatedTable = await updateTable({ id: tableId, submitData: { data: { status: 1, order: null } } });
+    console.log('updated table is :  : ', updatedTable);
     alert('orderSubmited');
     modalClose();
     navigate('/dashboard/table');
@@ -213,11 +222,13 @@ const CreateOrder = (props) => {
 
   const cancelOrder = () => {};
 
+  console.log('order mode is : ', orderIsUpdate);
+
   return (
     <>
       <Box sx={{ width: '100%', backgroundColor: '#EDEFF1', padding: '1rem' }}>
         <Box>
-          <Typography>Table 1</Typography>
+          <Typography>Table : {tableId}</Typography>
         </Box>
         <Box sx={{ padding: '.5rem 0rem', display: 'flex', justifyContent: 'space-between' }}>
           <Box>
