@@ -209,27 +209,6 @@ export default function DashboardAppPage() {
           <OrderAnalytics />
         </Box>
         {/* Most sold food section */}
-        {/* <Box
-          sx={{
-            marginTop: '1rem',
-            minHeight: '25rem',
-            boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;',
-            padding: '1rem',
-            borderRadius: '.5rem',
-          }}
-        >
-          <Typography sx={{ fontSize: '1.3rem', fontWeight: '600' }}>Order Analytics</Typography>
-
-          <Table sx={{ marginTop: '1rem' }}>
-            <TableHead>
-              <TableRow>
-                <TableCell>Food name</TableCell>
-                <TableCell>Item price</TableCell>
-                <TableCell>Count</TableCell>
-              </TableRow>
-            </TableHead>
-          </Table>
-        </Box> */}
       </Container>
     </>
   );
