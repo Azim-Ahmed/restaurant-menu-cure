@@ -42,9 +42,10 @@ export default function DashboardAppPage() {
 
   const [activeTables, setActiveTables] = useState([]);
   const [totalSale, setTotalSale] = useState(null);
+  const [allOrders, setAllOrder] = useState([])
 
   const { data: allTables } = useGetTablesQuery();
-  const { data: allOrders } = useGetOrdersByDateQuery({gtD:`${year}-${month}-${day}`,ltD:`${year}-${month}-${day}`});
+  const { data: getOrders } = useGetOrdersByDateQuery({gtD:`${year}-${month}-${day}`,ltD:`${year}-${month}-${day}`});
 
   const { user } = useSelector((state) => state.auth);
 
@@ -58,18 +59,27 @@ export default function DashboardAppPage() {
   }, [allTables]);
 
   useEffect(() => {
-    if (!allOrders) {
+    if (!getOrders) {
       return;
     }
 
-    const total = allOrders?.data?.reduce(
+    const orders = getOrders?.data?.filter((item) => {
+      const oDate =  new Date(item?.attributes?.createdAt).toLocaleDateString() 
+      const sDate = new Date().toLocaleDateString();
+       return oDate == sDate;
+     });
+     
+     console.log("filtered orders is : ", orders)
+     setAllOrder(orders)
+
+    const total = orders?.reduce(
       (accumulator, currentValue) =>
         accumulator + Number(currentValue.attributes.final_price || currentValue.attributes.totalPrice),
       0
     );
     // console.log("total is : ", total);
     setTotalSale(total);
-  }, [allOrders]);
+  }, [getOrders]);
 
   // console.log('all table is : ', allTables);
 
@@ -139,7 +149,7 @@ export default function DashboardAppPage() {
                 >
                   <Box>
                     <Typography sx={{ fontSize: '1rem', color: colors.black1 }}>Total Sale</Typography>
-                    <Typography sx={{ fontSize: '2rem', color: colors.black1 }}>{totalSale}tk</Typography>
+                    <Typography sx={{ fontSize: '2rem', color: colors.black1 }}>{totalSale || 0}tk</Typography>
                   </Box>
                   <Box>
                     <OutboundIcon sx={{ height: '3rem', width: '3rem', color: colors.primary }} />
@@ -165,7 +175,7 @@ export default function DashboardAppPage() {
                     <Box>
                       <Typography sx={{ fontSize: '1rem', color: colors.black1 }}>Total orders</Typography>
                       <Typography sx={{ fontSize: '2rem', color: colors.black1 }}>
-                        {(allOrders && Array.isArray(allOrders?.data) && allOrders?.data?.length) || 0}
+                        {(allOrders && Array.isArray(allOrders) && allOrders?.length) || 0}
                       </Typography>
                     </Box>
                     <Box>
@@ -195,7 +205,7 @@ export default function DashboardAppPage() {
                         Current orders
                       </Typography>
                       <Typography sx={{ fontSize: '2rem', textDecoration: 'none', color: colors.black1 }}>
-                        {activeTables.length}
+                        {activeTables.length || 0}
                       </Typography>
                     </Box>
                     <Box>

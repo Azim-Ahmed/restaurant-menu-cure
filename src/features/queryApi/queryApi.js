@@ -13,12 +13,12 @@ const queryApi = apiSlice.injectEndpoints({
 
     getOrdersByDate: builder.query({
       query: ({ ltD, gtD }) => {
-        return `http://localhost:1337/api/orders?createdAt_gte=${gtD}&createdAt_lte=${ltD}`;
+        return `/api/orders?populate=foods&pagination[page]=1&pagination[pageSize]=100`;
       },
       providesTags: ['Order'],
     }),
     getCurrentMonthOrder: builder.query({
-      query: (id) => `api/orders?createdAt_gte=2023-03-25&createdAt_lte=2023-03-25`,
+      query: (id) => `/api/orders?populate=foods&pagination[page]=1&pagination[pageSize]=100`,
       providesTags: ['Order'],
     }),
   }),

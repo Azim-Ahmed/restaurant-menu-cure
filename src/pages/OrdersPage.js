@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 // @mui
 import { styled, alpha } from '@mui/material/styles';
 import { Box, Button, Typography, OutlinedInput, InputAdornment, Card, Container } from '@mui/material';
@@ -31,6 +31,7 @@ const OrdersPage = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedId, setselectedId] = useState(null);
   const [totalSale, setTotalSale] = useState(null);
+  const [allOrder, setAllOrder] = useState([]);
 
   const modalClose = () => {
     setModalOpen(false);
@@ -57,7 +58,22 @@ const OrdersPage = (props) => {
       return;
     }
 
-    const total = getOrders?.data?.reduce(
+    const orders = getOrders?.data?.filter((item) => {
+     const oDate =  new Date(item?.attributes?.createdAt).toLocaleDateString() 
+     const sDate = new Date(filterDate).toLocaleDateString();
+      return oDate == sDate;
+    });
+
+    setAllOrder(orders)
+
+    // console.log('filters is : ', orders);
+
+    // const orders = getOrders?data?.filter((item)=> {
+    //   return new Date (item.attributes.createdAt) == new Date(filterDate)
+    // })
+    // const filteredData =getOrders?data?.filter(item => new Date(item.date) > new Date("2022-03-01"))
+
+    const total = orders?.reduce(
       (accumulator, currentValue) =>
         accumulator + Number(currentValue.attributes.final_price || currentValue.attributes.totalPrice),
       0
@@ -65,6 +81,8 @@ const OrdersPage = (props) => {
     // console.log("total is : ", total);
     setTotalSale(total);
   }, [getOrders]);
+
+  // console.log('get orders is : ', getOrders);
 
   return (
     <>
@@ -75,7 +93,7 @@ const OrdersPage = (props) => {
       <Container maxWidth="xl">
         <Box sx={{ width: '100%', padding: '1rem' }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Typography variant="h4"> Orders ({moment(filterDate).format("Do MMMM YYYY")} )</Typography>
+            <Typography variant="h4"> Orders ({moment(filterDate).format('Do MMMM YYYY')} )</Typography>
             <Box>{/* <Typography sx={{fontSize:25}}>Today</Typography> */}</Box>
           </Box>
           {/* <Typography>{activeCategoryName && activeCategoryName}</Typography> */}
@@ -128,13 +146,13 @@ const OrdersPage = (props) => {
               </Box>
             </Box>
           </Box>
-          {Array.isArray(getOrders?.data) &&
-            getOrders?.data?.map((order) => {
+          {Array.isArray(allOrder) &&
+            allOrder.map((order) => {
               return (
                 <Box sx={{ marginTop: '.7rem', cursor: 'pointer' }}>
                   <Card
                     onClick={() => {
-                      setselectedId(order?.id)
+                      setselectedId(order?.id);
                       setModalOpen(true);
                     }}
                     variant="outlined"

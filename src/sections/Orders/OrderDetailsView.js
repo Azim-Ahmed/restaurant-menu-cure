@@ -5,7 +5,7 @@ import moment from 'moment';
 
 const OrderDetailsView = ({ orderId }) => {
   // console.log("Order id is : ", orderId);
-  const { data: order } = useGetFullOrderQuery(39);
+  const { data: order } = useGetFullOrderQuery(orderId);
   console.log('order is : ', order);
   return (
     <Box sx={{ marginTop: 2 }}>
