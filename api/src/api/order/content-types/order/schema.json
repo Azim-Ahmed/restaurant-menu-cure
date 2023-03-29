@@ -27,12 +27,6 @@
     "totalPrice": {
       "type": "biginteger"
     },
-    "foods": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::food.food",
-      "mappedBy": "order"
-    },
     "payment": {
       "type": "boolean",
       "default": false
@@ -51,6 +45,12 @@
     },
     "qty": {
       "type": "json"
+    },
+    "foods": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::food.food",
+      "mappedBy": "orders"
     }
   }
 }

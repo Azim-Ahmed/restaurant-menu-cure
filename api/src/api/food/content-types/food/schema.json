@@ -49,9 +49,9 @@
       "target": "api::category.category",
       "inversedBy": "foods"
     },
-    "order": {
+    "orders": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::order.order",
       "inversedBy": "foods"
     }
