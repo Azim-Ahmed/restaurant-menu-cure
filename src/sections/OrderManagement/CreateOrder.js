@@ -219,8 +219,32 @@ const CreateOrder = (props) => {
     modalClose();
     navigate('/dashboard/table');
   };
+  const cancelOrder = async () => {
+    const orderData = {
+      data: {
+        order_status: 4,
+        totalPrice: totalPrice,
+        final_price: finalPrice,
+        foods: await cart?.map((i) => i.id),
+        qty: {
+          foodCount: await cart?.map((i) => {
+            return { food_id: i.id, food_qty: i.food_qty };
+          }),
+        },
+        table: tableId,
+      },
+    };
 
-  const cancelOrder = () => {};
+    const data = await updateOrder({
+      id: getSingleTableData?.data?.attributes?.order?.data?.id,
+      submitData: orderData,
+    });
+    console.log('canceled order data is : ', data);
+    const updatedTable = await updateTable({ id: tableId, submitData: { data: { status: 1, order: null } } });
+    console.log('order is canceled ');
+    navigate('/dashboard/table');
+  };
+
 
   console.log('order mode is : ', orderIsUpdate);
 
@@ -337,7 +361,7 @@ const CreateOrder = (props) => {
       </Box>
       <Box sx={{ marginTop: '1rem', display: 'flex', justifyContent: 'flex-end' }}>
         <Box style={{ display: 'flex', gap: '1rem' }}>
-          <Button variant="contained" sx={{ bgcolor: colors.failed }}>
+          <Button onClick={()=>cancelOrder()} variant="contained" sx={{ bgcolor: colors.failed }}>
             Cancel
           </Button>
           <Button onClick={() => setModalOpen(true)} variant="contained" sx={{ bgcolor: colors.success }}>

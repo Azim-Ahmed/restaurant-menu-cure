@@ -172,7 +172,7 @@ const OrdersPage = (props) => {
 
                       <Typography sx={{ fontSize: 18, fontWeight: '600' }}>{order?.id}</Typography>
                       <Typography sx={{ fontSize: 18, fontWeight: '600', marginLeft: '1.2rem' }}>
-                        {order?.attributes?.status === 1 ? 'Pending' : 'Completed'}
+                        {order?.attributes?.status === 1 ? 'Pending' : order?.attributes?.status === 3 ? 'Completed' : "Canceled"}
                       </Typography>
                     </Box>
                     <Box sx={{ flex: 1, textAlign: 'end' }}>
